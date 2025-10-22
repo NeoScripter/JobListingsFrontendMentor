@@ -1,6 +1,6 @@
 const API_URL = 'http://api-endpoint.ru.swtest.ru/api/job-listings';
 const SESSION_KEY = 'jobs';
-const STORAGE_DURATION = 2000;
+const STORAGE_DURATION = 10000;
 
 class JobBoard {
     constructor() {
@@ -19,6 +19,11 @@ class JobBoard {
     }
 
     async loadJobs() {
+        const params = new URLSearchParams();
+
+        for (const tag of this.appliedFilters) {
+            params.append('tags[]', tag);
+        }
         try {
             if (this.checkCache(SESSION_KEY)) {
                 const jobs = sessionStorage.getItem(SESSION_KEY);
@@ -27,7 +32,10 @@ class JobBoard {
             }
 
             this.updateLoadingState('Loading...');
-            const res = await fetch(API_URL);
+
+            const url = `${API_URL}?${params.toString()}`;
+
+            const res = await fetch(url);
             if (!res.ok) throw new Error(`Failed to fetch jobs: ${res.status}`);
 
             const jobs = await res.json();
@@ -59,12 +67,17 @@ class JobBoard {
     clearFilters() {
         this.appliedFilters.clear();
         this.filters.classList.add('hidden');
+        this.clearCache();
+        this.loadJobs();
     }
 
     addFilter(filter) {
+        if (this.appliedFilters.has(filter)) return;
         this.appliedFilters.add(filter);
 
         this.renderBtns(this.appliedFilters);
+        this.clearCache();
+        this.loadJobs();
 
         this.filters.classList.remove('hidden');
     }
@@ -78,8 +91,14 @@ class JobBoard {
         }
 
         this.renderBtns(this.appliedFilters);
+        this.clearCache();
+        this.loadJobs();
 
         this.filters.classList.remove('hidden');
+    }
+
+    clearCache(key = SESSION_KEY) {
+        sessionStorage.removeItem(key);
     }
 
     storeCache(jobs) {
@@ -134,6 +153,10 @@ class JobBoard {
 
     addJobCard(job, fragment) {
         const card = this.cardTemplate.content.cloneNode(true);
+
+        if (job.is_featured) {
+            card.querySelector('.card').classList.add('featured');
+        }
 
         card.querySelector('img').src = job.logo_url;
         card.querySelector('.card__company').textContent = job.company_name;
