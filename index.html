@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
+
+        <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+        />
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+
+        <link
+            rel="stylesheet"
+            href="assets/reset.css"
+        />
+        <link
+            rel="stylesheet"
+            href="assets/styles.css"
+        />
+        <script
+            src="script.js"
+            defer
+        ></script>
+        <title>Job Postings</title>
+    </head>
+    <body>
+        <main class="main">
+            <div
+                id="filters"
+                class="filter-panel hidden"
+            >
+                <ul class="filter-list"></ul>
+
+                <button id="clear-btn">Clear</button>
+            </div>
+
+            <ul class="cards"></ul>
+        </main>
+
+        <template id="card__template">
+            <li class="card">
+                <div class="card__wrapper">
+                    <figure
+                        class="card__logo"
+                        aria-hidden="true"
+                    >
+                        <img
+                            src="assets/1.svg"
+                            alt="Company logo"
+                        />
+                    </figure>
+                    <div>
+                        <header class="card__header">
+                            <span class="card__company">title</span>
+                        </header>
+                        <p class="card__title">position name</p>
+                        <ul class="card__data">
+                            <li>2w ago</li>
+                            <li>2w ago</li>
+                            <li>2w ago</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr />
+                <ul class="card__tags">
+                    <li>
+                        <button class="card__tag">Backend</button>
+                    </li>
+                    <li>
+                        <button class="card__tag">Backend</button>
+                    </li>
+                </ul>
+            </li>
+        </template>
+
+        <template id="btn__template">
+            <li>
+                <span>Backend</span>
+                <button class="btn-remove-filter">
+                    <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M13.4346 2.12109L8.83789 6.7168L13.4346 11.3135L11.3135 13.4346L6.7168 8.83789L2.12109 13.4346L0 11.3135L4.5957 6.7168L0 2.12109L2.12109 0L6.7168 4.5957L11.3135 0L13.4346 2.12109Z"
+                            fill="white"
+                        />
+                    </svg>
+                </button>
+            </li>
+        </template>
+    </body>
+</html>

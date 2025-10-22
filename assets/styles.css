@@ -1,0 +1,233 @@
+:root {
+    --clr-primary-bg: #effafa;
+    --clr-primary: #5ca5a5;
+    --clr-primary-light: #63baba;
+    --clr-primary-dark: #2b3939;
+
+    --clr-text-muted: #7c8f8f;
+    --clr-text-light: #b7c4c4;
+
+    --shadow-card: 0 15px 20px -5px rgba(13, 113, 130, 0.15);
+}
+
+html,
+body {
+    overflow-x: clip;
+}
+
+body {
+    background-color: var(--clr-primary-bg);
+    background-repeat: repeat-x;
+    background-image: url(bg.webp);
+    min-height: 100vh;
+    font-family: 'League Spartan', sans-serif;
+}
+
+.main {
+    padding-inline: 1.5rem;
+    padding-top: 7.5rem;
+    max-width: 1440px;
+    margin-inline: auto;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(21rem, 1fr));
+    gap: 3rem;
+}
+@media screen and (min-width: 1000px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    --padding-inline: 1.25rem;
+    padding-inline: var(--padding-inline);
+    padding-bottom: 0.85rem;
+    padding-top: 2.25rem;
+    position: relative;
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: var(--shadow-card);
+}
+
+.card__header {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 0.85rem;
+}
+.card__company {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--clr-primary);
+}
+
+.card__title {
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 0.9rem;
+}
+.card__data {
+    display: flex;
+    gap: 1.25rem;
+    font-weight: 500;
+    color: var(--clr-text-muted);
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.card__data li:not(:first-child) {
+    list-style: disc;
+}
+.card__logo {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    top: 0;
+    transform: translateY(-50%);
+    left: var(--padding-inline);
+}
+.card__logo img {
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+}
+.card__tags {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+.card__tag {
+    background-color: var(--clr-primary-bg);
+    color: var(--clr-primary);
+    font-weight: 600;
+    border: none;
+    padding-block: 0.5em;
+    padding-inline: 1em;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+.card__tag:focus-visible,
+.card__tag:hover {
+    background-color: var(--clr-primary-light);
+    color: white;
+    outline: none;
+}
+
+.filter-panel {
+    background-color: white;
+    padding: 5px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 4rem;
+    padding-inline: 1.5rem;
+    padding-block: 1.25rem;
+    transition: opacity 0.3 ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-panel.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filter-list li {
+    background-color: var(--clr-primary-bg);
+    color: var(--clr-primary);
+    font-weight: 600;
+    border: none;
+    padding-block: 0.5em;
+    padding-inline: 1em;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.filter-list button {
+    background: var(--clr-primary);
+    color: white;
+    width: 2rem;
+    height: 2rem;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
+}
+
+.filter-list button:focus-visible,
+.filter-list button:hover {
+    background-color: var(--clr-primary-dark);
+    outline: none;
+}
+
+#clear-btn {
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+@media screen and (min-width: 1000px) {
+    #clear-btn {
+        font-size: 1rem;
+    }
+    .card__company {
+        font-size: 1.25rem;
+    }
+    .card__title {
+        font-size: 1.5rem;
+    }
+    .card__data {
+        font-size: 1.25rem;
+        gap: 1.75rem;
+    }
+    .card__wrapper {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    .card__logo {
+        position: static;
+        width: 5.5rem;
+        height: 5.5rem;
+        transform: translateY(0%);
+    }
+    .card {
+        --padding-inline: 2.5rem;
+        padding-block: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+    .cards {
+        font-size: 1.25rem;
+    }
+}
+
+#clear-btn:focus-visible,
+#clear-btn:hover {
+    color: var(--clr-primary);
+}
