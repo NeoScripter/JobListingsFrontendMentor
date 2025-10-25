@@ -1,4 +1,4 @@
-const API_URL = 'http://api-endpoint.ru.swtest.ru/api/job-listings';
+const API_URL = 'https://api.ilyaandreev.dev/api/job-listings';
 const SESSION_KEY = 'jobs';
 const STORAGE_DURATION = 10000;
 
